@@ -4,6 +4,9 @@ import MyContext from '../context/MyContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
+  const [filterByName, setFilter] = useState({
+    name: '',
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -16,6 +19,8 @@ function Provider({ children }) {
 
   const context = {
     data,
+    filterByName,
+    setFilter,
   };
 
   return (
