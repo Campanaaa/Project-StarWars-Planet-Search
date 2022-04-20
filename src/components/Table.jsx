@@ -19,10 +19,10 @@ function Table() {
     'Url',
   ];
 
-  function filterNumericValues(items) {
+  function filterNumericValues(items, filter) {
     const filteredItems = [];
-    if (filterByNumericValues[0]) {
-      const { column, comparison, value } = filterByNumericValues[0];
+    if (filter) {
+      const { column, comparison, value } = filter;
       switch (comparison) {
       case 'maior que': {
         items.forEach((item) => {
@@ -55,6 +55,14 @@ function Table() {
     return items;
   }
 
+  function filterWithVariousNumerics(list) {
+    let planetList = [...list];
+    filterByNumericValues.forEach((filter) => {
+      const newPlanetList = filterNumericValues(planetList, filter);
+      planetList = [...newPlanetList];
+    });
+    return planetList;
+  }
   return (
     <table>
       <thead>
@@ -67,7 +75,7 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        { filterNumericValues(
+        { filterWithVariousNumerics(
           data.filter((e) => e.name.includes(filterByName.name)),
         ).map((planet) => (
           <tr key={ planet.name }>
