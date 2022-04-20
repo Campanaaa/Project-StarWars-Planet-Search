@@ -13,6 +13,19 @@ function Filter() {
     comparison: 'maior que',
     value: 0,
   });
+  const [dropDownColumn, setDropDownColumn] = useState([
+    'population',
+    'orbital_period',
+    'diameter',
+    'rotation_period',
+    'surface_water',
+  ]);
+
+  const dropDownComparsion = [
+    'maior que',
+    'menor que',
+    'igual a',
+  ];
 
   function handleChange({ target }) {
     const { value } = target;
@@ -31,24 +44,13 @@ function Filter() {
   }
 
   function handleFilter() {
+    const { column } = teporaryFilter;
+    const indexOfTheRemoval = dropDownColumn.indexOf(column);
+    setDropDownColumn(dropDownColumn.filter((e, index) => index !== indexOfTheRemoval));
     setFilterByNumericValues((prevState) => (
       [...prevState, teporaryFilter]
     ));
   }
-
-  const dropDownColumn = [
-    'population',
-    'orbital_period',
-    'diameter',
-    'rotation_period',
-    'surface_water',
-  ];
-
-  const dropDownComparsion = [
-    'maior que',
-    'menor que',
-    'igual a',
-  ];
 
   return (
     <>
