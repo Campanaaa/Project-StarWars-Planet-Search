@@ -4,9 +4,10 @@ import MyContext from '../context/MyContext';
 
 function Provider({ children }) {
   const [data, setData] = useState([]);
-  const [filterByName, setFilter] = useState({
+  const [filterByName, setFilterByName] = useState({
     name: '',
   });
+  const [filterByNumericValues, setFilterByNumericValues] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,9 @@ function Provider({ children }) {
   const context = {
     data,
     filterByName,
-    setFilter,
+    setFilterByName,
+    filterByNumericValues,
+    setFilterByNumericValues,
   };
 
   return (
